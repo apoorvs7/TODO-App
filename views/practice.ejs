@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>
+            <%= title %>
+        </title>
+    </head>
+    <body>
+        <ul>
+            <% for(i of tasks_list){ %>
+
+                <li>
+                    <p> <%= i.tasks %> </p>
+                    <p> <%= i.date %></p>
+                </li>
+
+                <%}%>
+        </ul>
+    </body>
+</html>

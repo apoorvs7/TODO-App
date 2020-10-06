@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>
+            <%= locals.title %>
+        </title>
+        <link rel="stylesheet" href="/CSS/home.css">
+        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <h1>	
+            <i class="fa fa-th-list"></i> TODO App
+        </h1>
+        <div>
+            <form action="/create-task" method="POST" name="taskForm" onsubmit="return validate()" class="e">
+                <!-- <input type="text" name="task" placeholder="Enter task"> -->
+                <div id="input-container">
+                    <div class="b">
+                        DESCRIPTION:<br>
+                        <textarea class="a" name="task" rows="2" cols="40" placeholder="What do you want to do?"></textarea>
+                    </div>
+                    <div class="c">
+                        DUE DATE:<br>
+                        <input type="date" name="date" placeholder="Enter date" id="date">
+                    </div>
+                    <div class="c">
+                        <label for="type">CATEGORY: <br></label>
+                        <select id='type' name='type'>
+                            <option value="Home">Home</option>
+                            <option value="College">College</option>
+                            <option value="Office">Office</option>
+                            <option value="Market">Market</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="but1"><i class="fa fa-plus"></i> Add Task</button>
+                </div>
+            </form>
+        </div>
+        <ul>
+            <%var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May”', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];%>
+            <form id="list-form" action="/delete-task" method="GET" name="delForm" onsubmit="return checkboxValidate()">
+                <button type="submit" class="but2"><i class="fa fa-trash"></i> Delete Tasks</button>
+                <% for(i of tasks_list){ %>
+                    <li>
+                        <input id="check" type="checkbox" name="idList" value="<%= i._id %>">
+                        <div id="task-descript">
+                            <%=i.task%>
+                            <div id="due"><i class="far fa-calendar-alt"></i> <%=monthNames[i.date.getMonth()] + ' ' + i.date.getDate() + ', ' + i.date.getFullYear()%></div>
+                        </div>
+                        <p class='type'>
+                            <%=i.type%>
+                        </p>
+                    </li>
+                <%}%>
+            </form>
+        </ul>
+        <script type="text/javascript" src="/JS/home.js"></script>
+    </body>
+</html>
